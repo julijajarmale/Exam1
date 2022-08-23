@@ -9,10 +9,6 @@ import { useEffect, useState } from 'react';
 
 function Back({show}) {
    
-   
-       
-
-
 
     return (
         <BackContext.Provider value={{
