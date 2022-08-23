@@ -217,7 +217,60 @@ app.put("/admin/services/:id", (req, res) => {
   );
 });
 
+//READ Masters
+app.get("/admin/masters", (req, res) => {
+  const sql = `
+SELECT masters.id, masters.name, masters.surname, masters.city, masters.spec, masters.photo, services.title AS service
+FROM masters
+LEFT JOIN services
+ON services.id = masters.service_id
+ORDER BY name
+`;
+  con.query(sql, (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
 
+//CREATE Masters
+app.post("/admin/masters", (req, res) => {
+  const sql = `
+  INSERT INTO masters
+  (name, surname, city, spec, photo, service_id)
+  VALUES (?, ?, ?, ?, ?, ?)
+  `;
+  con.query(
+    sql,
+    [
+      req.body.name,
+      req.body.surname,
+      req.body.city,
+      req.body.spec,
+      req.body.photo,
+      req.body.service
+      
+    ],
+    (err, result) => {
+      if (err) throw err;
+      res.send({
+        result,
+        msg: { text: "OK, new and shiny product was created", type: "success" },
+      });
+    }
+  );
+});
+
+//DELETE Masters
+app.delete("/admin/masters/:id", (req, res) => {
+  const sql = `
+  DELETE FROM masters
+  WHERE id = ?
+  `;
+  con.query(sql, [req.params.id], (err, result) => {
+    if (err) throw err;
+    res.send({ result, msg: { text: "OK, Product gone", type: "success" } });
+  });
+});
 
 
 

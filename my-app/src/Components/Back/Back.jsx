@@ -5,6 +5,7 @@ import { authConfig } from '../../Functions/auth';
 import Admin from './Admin/Admin';
 import { useEffect, useState } from 'react';
 import ServiceCrud from './Services/Crud';
+import MasterCrud from './Masters/Crud';
 
 
 
@@ -17,6 +18,10 @@ function Back({show}) {
     const [deleteService, setDeleteService] = useState(null)
     const [editService, setEditService] = useState(null)
     const [modalService, setModalService] = useState(null)
+
+    const [masters, setMasters] = useState(null)
+    const [createMaster, setCreateMaster] = useState(null)
+    const [deleteMaster, setDeleteMaster] = useState(null)
 
 
 //READ BOOKS 
@@ -59,6 +64,33 @@ useEffect(() => {
        
 }, [editService]);
 
+//READ Master
+useEffect(() => {
+    axios.get('http://localhost:3003/admin/masters', authConfig())
+        .then(res => setMasters(res.data));
+}, [lastUpdate]);
+
+
+//CREATE BOOKS
+
+useEffect(() => {
+    if (null === createMaster) return;
+    axios.post('http://localhost:3003/admin/masters', createMaster, authConfig())
+    .then(res => {
+        setLastUpdate(Date.now());
+    })
+    
+}, [createMaster]);
+
+//DELETE Master
+useEffect(() => {
+    if (null === deleteMaster) return;
+    axios.delete('http://localhost:3003/admin/masters/' + deleteMaster.id, authConfig())
+        .then(res => {
+            setLastUpdate(Date.now());
+        })
+    
+}, [deleteMaster]);
 
     return (
         <BackContext.Provider value={{
@@ -68,6 +100,9 @@ useEffect(() => {
           setEditService,
           modalService,
           setModalService,
+          masters,
+          setCreateMaster,
+          setDeleteMaster,
         
             
         }}>
@@ -83,6 +118,7 @@ useEffect(() => {
                     <>
                     
                     <Nav/>
+                    <MasterCrud/>
                     
                     
                     </>

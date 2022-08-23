@@ -127,7 +127,7 @@
         width: 40%;
         margin-left: 20px;
       }
-      .author-pic {
+      .auth-pic {
         img {
           border: 2px solid pink;
           border-radius: 50%;
@@ -318,7 +318,14 @@ h2 {
   .content {
     display: grid;
   }
-
+  .master-cover {
+    img {
+      border: 2px solid pink;
+      border-radius: 50%;
+      height: 150px;
+      width: 70%;
+    }
+  }
   .book-cover {
     img {
       width: 50%;
