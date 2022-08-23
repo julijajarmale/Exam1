@@ -14,16 +14,30 @@ function Front() {
   const [lastUpdate, setLastUpdate] = useState(Date.now());
   const [masters, setMasters] = useState(null);
 
+  const [rateNow, setRateNow] = useState(null);
+  
+
 //READ Masters
 useEffect(() => {
   axios.get('http://localhost:3003/masters')
       .then(res => setMasters(res.data));
 }, [lastUpdate]);
 
+ // Rate Create
+  useEffect(() => {
+    if (null === rateNow) return;
+    axios
+      .put("http://localhost:3003/masters/" + rateNow.id, rateNow)
+      .then((_) => {
+        setLastUpdate(Date.now());
+      });
+  }, [rateNow]);
+
   return (
     <FrontContext.Provider
       value={{
         masters,
+        setRateNow,
        
        
 

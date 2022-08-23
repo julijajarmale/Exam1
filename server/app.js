@@ -345,7 +345,7 @@ app.put("/admin/users/:id", (req, res) => {
 //READ Masters
 app.get("/masters", (req, res) => {
   const sql = `
-SELECT masters.id, masters.name, masters.surname, masters.city, masters.spec, masters.photo, services.title AS service
+SELECT masters.id, masters.name, masters.surname, masters.city, masters.spec, masters.photo, masters.rate, masters.rate_sum, services.title AS service
 FROM masters
 LEFT JOIN services
 ON services.id = masters.service_id
@@ -357,8 +357,19 @@ ORDER BY name
   });
 });
 
+//CREATE RATE
 
-
+app.put("/masters/:id", (req, res) => {
+  const sql = `
+        UPDATE masters
+        SET rate = rate + 1, rate_sum = rate_sum + ?
+        WHERE id = ?
+    `;
+  con.query(sql, [req.body.rate, req.params.id], (err, result) => {
+    if (err) throw err;
+    res.send({ result, msg: { text: "Tu prabalsavai", type: "danger" } });
+  });
+});
 
 
 app.get("/", (req, res) => {
