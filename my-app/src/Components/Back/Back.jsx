@@ -22,6 +22,8 @@ function Back({show}) {
     const [masters, setMasters] = useState(null)
     const [createMaster, setCreateMaster] = useState(null)
     const [deleteMaster, setDeleteMaster] = useState(null)
+    const [editMaster, setEditMaster] = useState(null)
+    const [modalMaster, setModalMaster] = useState(null)
 
 
 //READ BOOKS 
@@ -92,6 +94,17 @@ useEffect(() => {
     
 }, [deleteMaster]);
 
+// EDIT Master
+useEffect(() => {
+        
+    if (null === editMaster) return;
+    axios.put('http://localhost:3003/admin/masters/' + editMaster.id, editMaster, authConfig())
+        .then(res => {
+            setLastUpdate(Date.now());
+        })
+       
+}, [editMaster]);
+
     return (
         <BackContext.Provider value={{
           services,
@@ -103,6 +116,9 @@ useEffect(() => {
           masters,
           setCreateMaster,
           setDeleteMaster,
+          setEditMaster,
+          modalMaster,
+          setModalMaster,
         
             
         }}>

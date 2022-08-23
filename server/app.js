@@ -272,7 +272,35 @@ app.delete("/admin/masters/:id", (req, res) => {
   });
 });
 
-
+//EDIT Master
+  
+app.put("/admin/masters/:id", (req, res) => {
+  const sql = `
+  UPDATE masters
+  
+  SET name = ?, surname = ?, city = ?, spec= ?, photo = ?, service_id = ?
+  WHERE id = ?
+  `;
+  con.query(
+    sql,
+    [
+      req.body.name,
+      req.body.surname,
+      req.body.city,
+      req.body.spec,
+      req.body.photo,
+      req.body.service,
+      req.params.id,
+    ],
+    (err, result) => {
+      if (err) throw err;
+      res.send({
+        result,
+        msg: { text: "OK, Cat updated. Now it is as new", type: "success" },
+      });
+    }
+  );
+});
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
