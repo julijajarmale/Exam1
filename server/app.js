@@ -341,6 +341,26 @@ app.put("/admin/users/:id", (req, res) => {
       res.send({ result, msg: { text: 'OK, Cat updated. Now it is as new', type: 'success' } });
   });
 });
+
+//READ Masters
+app.get("/masters", (req, res) => {
+  const sql = `
+SELECT masters.id, masters.name, masters.surname, masters.city, masters.spec, masters.photo, services.title AS service
+FROM masters
+LEFT JOIN services
+ON services.id = masters.service_id
+ORDER BY name
+`;
+  con.query(sql, (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
+
+
+
+
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
