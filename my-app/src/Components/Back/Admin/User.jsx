@@ -40,18 +40,18 @@ function User({ user }) {
 
       <div className="buttons">
         <button type="button" className="button btn5" onClick={handleApprove}>
-          Approve User
+          APPROVE
         </button>
         <button
           type="button"
           className="button btn2"
           onClick={handleDissaprove}
         >
-          Disapprove User 
+          DISAPPROVE 
         </button>
     
         <button type="button" className="button btn3" onClick={handleDelete}>
-          Delete User
+          DELETE
         </button>
       </div>
     </li>

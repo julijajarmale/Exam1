@@ -806,7 +806,8 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
+  width: 80%;
+  margin-left: 50px;
   
 
   .content {
@@ -828,6 +829,9 @@ h2 {
         height: auto;
       }
     }
+  }
+  .button {
+    height: 25px;
   }
   .btn2 {
     align-items: center;
