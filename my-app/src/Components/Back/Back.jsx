@@ -15,6 +15,9 @@ function Back({show}) {
     const [services, setServices] = useState(null)
     const [createService, setCreateService] = useState(null)
     const [deleteService, setDeleteService] = useState(null)
+    const [editService, setEditService] = useState(null)
+    const [modalService, setModalService] = useState(null)
+
 
 //READ BOOKS 
 useEffect(() => {
@@ -46,15 +49,15 @@ useEffect(() => {
 }, [deleteService]);
 
 // EDIT BOOK
-//useEffect(() => {
-//        
-//    if (null === editBook) return;
-//    axios.put('http://localhost:3003/admin/books/' + editBook.id, editBook, authConfig())
-//        .then(res => {
-//            setLastUpdate(Date.now());
-//        })
-//       
-//}, [editBook]);
+useEffect(() => {
+        
+    if (null === editService) return;
+    axios.put('http://localhost:3003/admin/services/' + editService.id, editService, authConfig())
+        .then(res => {
+            setLastUpdate(Date.now());
+        })
+       
+}, [editService]);
 
 
     return (
@@ -62,6 +65,9 @@ useEffect(() => {
           services,
           setCreateService,
           setDeleteService,
+          setEditService,
+          modalService,
+          setModalService,
         
             
         }}>

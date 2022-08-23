@@ -189,7 +189,33 @@ app.delete("/admin/services/:id", (req, res) => {
   });
 });
 
-
+//EDIT Serivces
+  
+app.put("/admin/services/:id", (req, res) => {
+  const sql = `
+  UPDATE services
+  
+  SET title = ?, city = ?, address = ?, photo = ?
+  WHERE id = ?
+  `;
+  con.query(
+    sql,
+    [
+      req.body.title,
+      req.body.city,
+      req.body.address,
+      req.body.photo,
+      req.params.id,
+    ],
+    (err, result) => {
+      if (err) throw err;
+      res.send({
+        result,
+        msg: { text: "OK, Cat updated. Now it is as new", type: "success" },
+      });
+    }
+  );
+});
 
 
 
