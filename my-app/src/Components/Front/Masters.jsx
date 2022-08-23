@@ -19,7 +19,7 @@ function Master({ master }) {
     <li className="book-list-item">
 
       <div className="content">
-        <div className="book-item">
+        <div className="author-pic">
           {master.photo ? (
             <div className="book-cover">
               <img src={master.photo} alt={master.name} />
