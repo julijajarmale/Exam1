@@ -120,7 +120,7 @@ function Create() {
               />
             </div>
             {masterPhoto ? (
-              <div className="photo-bin">
+              <div className="book-cover">
                 <img src={masterPhoto} alt="nice" />
               </div>
             ) : null}

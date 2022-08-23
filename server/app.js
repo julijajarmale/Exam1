@@ -278,7 +278,7 @@ app.put("/admin/masters/:id", (req, res) => {
   const sql = `
   UPDATE masters
   
-  SET name = ?, surname = ?, city = ?, spec= ?, photo = ?, service_id = ?
+  SET name = ?, surname = ?, city = ?, spec= ?, photo = ?
   WHERE id = ?
   `;
   con.query(
@@ -289,7 +289,6 @@ app.put("/admin/masters/:id", (req, res) => {
       req.body.city,
       req.body.spec,
       req.body.photo,
-      req.body.service,
       req.params.id,
     ],
     (err, result) => {
@@ -302,6 +301,46 @@ app.put("/admin/masters/:id", (req, res) => {
   );
 });
 
+
+//READ USERS
+app.get("/admin/users", (req, res) => {
+  const sql = `
+SELECT *
+
+FROM users
+`;
+  con.query(sql, (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
+
+//Delete User
+
+app.delete("/admin/users/:id", (req, res) => {
+  const sql = `
+  DELETE FROM users
+  WHERE id = ?
+  `;
+  con.query(sql, [req.params.id], (err, result) => {
+      if (err) throw err;
+      res.send({ result, msg: { text: 'OK, Cat gone', type: 'success' } });
+  });
+});
+
+//Edit Story
+app.put("/admin/users/:id", (req, res) => {
+  const sql = `
+  UPDATE users
+  SET approved = ? 
+  WHERE id = ?
+  `;
+  con.query(sql, [req.body.approved, req.params.id], (err, result) => {
+      if (err) throw err;
+      res.send({ result, msg: { text: 'OK, Cat updated. Now it is as new', type: 'success' } });
+  });
+});
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });

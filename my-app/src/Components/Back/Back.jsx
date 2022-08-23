@@ -25,6 +25,10 @@ function Back({show}) {
     const [editMaster, setEditMaster] = useState(null)
     const [modalMaster, setModalMaster] = useState(null)
 
+    const [users, setUsers] = useState(null)
+    const [deleteUser, setDeleteUser] = useState(null);
+    const [approveUser, setApproveUser] = useState(null);
+
 
 //READ BOOKS 
 useEffect(() => {
@@ -105,6 +109,41 @@ useEffect(() => {
        
 }, [editMaster]);
 
+//READ Users
+useEffect(() => {
+    axios.get('http://localhost:3003/admin/users', authConfig())
+        .then(res => setUsers(res.data));
+}, [lastUpdate]);
+
+
+//DELETE Users
+
+useEffect(() => {
+    if (null === deleteUser) return;
+    axios
+      .delete(
+        "http://localhost:3003/admin/users/" + deleteUser.id,
+        authConfig()
+      )
+      .then((res) => {
+        setLastUpdate(Date.now());
+      });
+  }, [deleteUser]);
+
+  //EDIT Product
+
+  useEffect(() => {
+    if (null === approveUser) return;
+    axios
+      .put(
+        "http://localhost:3003/admin/users/" + approveUser.id,
+        approveUser,
+        authConfig()
+      )
+      .then((res) => {
+        setLastUpdate(Date.now());
+      });
+  }, [approveUser]);
     return (
         <BackContext.Provider value={{
           services,
@@ -119,7 +158,9 @@ useEffect(() => {
           setEditMaster,
           modalMaster,
           setModalMaster,
-        
+          users,
+          setDeleteUser,
+          setApproveUser,
             
         }}>
               {
