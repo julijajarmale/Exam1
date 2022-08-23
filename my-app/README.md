@@ -2,7 +2,7 @@
 
 
 
-Site published at:
+Site published at: https://julijajarmale.github.io/Exam1/
 
 Design: Julija Ilginyte-Jarmale
 
