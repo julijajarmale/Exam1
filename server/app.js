@@ -136,6 +136,61 @@ const doAuth = function(req, res, next) {
   });
 
 
+//READ SERVICES
+app.get("/admin/services", (req, res) => {
+  const sql = `
+SELECT *
+
+FROM services 
+`;
+  con.query(sql, (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
+
+//CREATE Services
+app.post("/admin/services", (req, res) => {
+  const sql = `
+  INSERT INTO services
+  (title, city, address, photo)
+  VALUES (?, ?, ?, ?)
+  `;
+  con.query(
+    sql,
+    [
+      req.body.title,
+      req.body.city,
+      req.body.address,
+      req.body.photo,
+     
+      
+    ],
+    (err, result) => {
+      if (err) throw err;
+      res.send({
+        result,
+        msg: { text: "OK, new and shiny product was created", type: "success" },
+      });
+    }
+  );
+});
+
+//DELETE SERVICES
+app.delete("/admin/services/:id", (req, res) => {
+  const sql = `
+  DELETE FROM services
+  WHERE id = ?
+  `;
+  con.query(sql, [req.params.id], (err, result) => {
+    if (err) throw err;
+    res.send({ result, msg: { text: "OK, Product gone", type: "success" } });
+  });
+});
+
+
+
 
 
 
