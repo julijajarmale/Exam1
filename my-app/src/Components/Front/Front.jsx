@@ -5,6 +5,7 @@ import FrontNav from "./Nav";
 import axios from "axios";
 import { useEffect, useState } from "react"
 import MastersList from "./List";
+import SortFilter from "./Sort";
 
 
 
@@ -15,7 +16,7 @@ function Front() {
   const [masters, setMasters] = useState(null);
 
   const [rateNow, setRateNow] = useState(null);
-  
+
 
 //READ Masters
 useEffect(() => {
@@ -38,6 +39,7 @@ useEffect(() => {
       value={{
         masters,
         setRateNow,
+        setMasters
        
        
 
@@ -47,7 +49,9 @@ useEffect(() => {
                     
                     <FrontNav />
       <div className="container">
+        
       <div className="row">
+      <SortFilter/>
         <MastersList/>
          
         </div>
