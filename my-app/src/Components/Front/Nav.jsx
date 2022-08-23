@@ -14,6 +14,7 @@ function FrontNav() {
                                         color: 'crimson'
                                     } : null
                             }>Admin</NavLink>
+                            <Link to="/register">Create Account</Link>
                             <Link to="/logout">Logout</Link>
                            
                               
