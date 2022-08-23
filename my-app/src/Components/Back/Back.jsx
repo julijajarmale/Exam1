@@ -28,10 +28,22 @@ function Back({show}) {
                     <Nav/>
                     <Admin/>
                     
-                   
-            
                     </>
-                    : show === 'books' ? <div>books crud</div>: 
+                    : show === 'masters' ?
+                    <>
+                    
+                    <Nav/>
+                    
+                    
+                    </>
+                    
+                    : 
+                    show === 'services' ?  <>
+                    
+                    <Nav/>
+                    
+                    
+                    </>: 
                         null
             }
         </BackContext.Provider>

@@ -14,19 +14,25 @@ function Nav() {
                                         color: '#f34091'
                                     } : null
                             }>Admin</NavLink>
-                            <NavLink to="/admin/books" className="nav-link" style={
+                            <NavLink to="/admin/masters" className="nav-link" style={
                                 ({ isActive }) =>
                                     isActive ? {
                                         color: '#f34091'
                                     } : null
-                            }>Knygos</NavLink>
+                            }>Masters</NavLink>
+                            <NavLink to="/admin/services" className="nav-link" style={
+                                ({ isActive }) =>
+                                    isActive ? {
+                                        color: '#f34091'
+                                    } : null
+                            }>Services</NavLink>
                     
                             <NavLink to="/" className="nav-link" style={
                                 ({ isActive }) =>
                                     isActive ? {
                                         color: '#f34091'
                                     } : null
-                            }>Pradinis puslapis</NavLink>
+                            }>Main Page</NavLink>
                             <Link to="/logout">Logout</Link>
                               
                         </nav>

@@ -24,9 +24,8 @@ function App() {
         <Route path="/logout" element={<LogoutPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/admin" element={<RequireAuth role="admin"><Back show="admin" /></RequireAuth>} />
-        <Route path="/admin/books" element={<RequireAuth role="admin"><Back show="books" /></RequireAuth>
-          }
-        />
+        <Route path="/admin/masters" element={<RequireAuth role="admin"><Back show="masters" /></RequireAuth> }/>
+        <Route path="/admin/services" element={<RequireAuth role="admin"><Back show="servicesh" /></RequireAuth> }/>
        
       </Routes>
     </BrowserRouter>

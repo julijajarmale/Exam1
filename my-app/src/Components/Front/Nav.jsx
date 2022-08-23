@@ -1,4 +1,4 @@
-import {  NavLink } from "react-router-dom";
+import {  Link, NavLink } from "react-router-dom";
 
 function FrontNav() {
 
@@ -14,6 +14,7 @@ function FrontNav() {
                                         color: 'crimson'
                                     } : null
                             }>Admin</NavLink>
+                            <Link to="/logout">Logout</Link>
                            
                               
                         </nav>
