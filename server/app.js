@@ -101,6 +101,22 @@ app.get("/login-check", (req, res) => {
   });
 });
 
+app.post("/register", (req, res) => {
+    const key = uuid.v4();
+    const sql = `
+    INSERT INTO users
+    (name, email, pass, session)
+    VALUES (?, ?, ?, ?)
+  `;
+    con.query(sql, [req.body.user, req.body.email, md5(req.body.pass), key], (err, result) => {
+      if (err) throw err;
+      if (!result.affectedRows) {
+        res.send({ msg: 'error', key: '' });
+      } else {
+        res.send({ msg: 'ok', key });
+      }
+    });
+  });
 
 app.post("/login", (req, res) => {
   const key = uuid.v4();

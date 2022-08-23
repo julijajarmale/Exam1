@@ -7,6 +7,7 @@ import {
   Route,
   Navigate,
   useNavigate,
+  Link,
 } from "react-router-dom";
 import Front from "./Components/Front/Front";
 import Back from "./Components/Back/Back";
@@ -21,6 +22,7 @@ function App() {
         <Route path="/" element={<RequireAuth role="user"><Front/></RequireAuth>} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/logout" element={<LogoutPage />} />
+        <Route path="/register" element={<RegisterPage />} />
         <Route path="/admin" element={<RequireAuth role="admin"><Back show="admin" /></RequireAuth>} />
         <Route path="/admin/books" element={<RequireAuth role="admin"><Back show="books" /></RequireAuth>
           }
@@ -68,7 +70,7 @@ function LoginPage() {
     <div className="container login-container">
       <div className="row">
         <div className="col-12 login-form">
-          <h2>Welcome to Book-App</h2>
+          <h2>Welcome to Autoservice App</h2>
           <div className="login">
             <div>
               Name:{" "}
@@ -95,11 +97,88 @@ function LoginPage() {
             <br></br>
             <small>name: user, password: 123</small>
           </div>
+          <div className='main-link'>
+          <Link
+          to='/register'
+          className='link'>
+          Create Account
+        </Link>
+        </div>
         </div>
       </div>
     </div>
   );
 }
+
+//////////////////REGISTER PAGE////////////
+function RegisterPage() {
+  const navigate = useNavigate();
+
+  const [user, setUser] = useState('');
+  const [pass, setPass] = useState('');
+  const [email, setEmail] = useState('');
+
+  const doRegister = () => {
+    axios.post("http://localhost:3003/register", { user, email, pass }).then((res) => {
+      
+      if ("ok" === res.data.msg) {
+        login(res.data.key);
+        navigate("/", { replace: true });
+      }
+    });
+  };
+  return (
+    <>
+      <div className="container login-container">
+      <div className="row">
+        <div className="col-12 login-form">
+        <h2 className='heading'>CREATE ACCOUNT</h2>
+        <div>
+              Name:{" "}
+              <input
+                className="input"
+                type="text"
+                value={user}
+                onChange={(e) => setUser(e.target.value)}
+              ></input>
+            </div>
+        <div>
+          Email:{' '}
+          <input
+          className="input"
+            type='text'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div>
+          Password:
+          <input
+          className="input"
+            type='password'
+            value={pass}
+            onChange={(e) => setPass(e.target.value)}
+          />
+        </div>
+        <button
+        className="btn buttons"
+          onClick={doRegister}>
+          Register
+        </button>
+        <div className='main-link'>
+        <Link 
+          to='/login'
+          className='link'>
+          Login
+        </Link>
+        </div>
+      </div>
+      </div>
+      </div>
+    </>
+  );
+}
+
 
 function LogoutPage() {
   useEffect(() => logout(), []);
